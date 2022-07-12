@@ -64,38 +64,50 @@ def en_level_difference(p_lv, e_lv):
 
 #攻撃
 def attak(attak_com):
-    aut_attak = random.randint(0, 1)
+    en_aut_attak = random.randint(0, 1)
+    en_tyois = random.randint(0, 1)
+    level = level_difference(pl_lv[attak_com], en_lv[en_aut_attak])
     if attak_com == 0:
         print("ドラゴンに攻撃した")
-        attak_p = level_difference(pl_lv[aut_attak], en_lv[aut_attak])
-        en_hp[aut_attak] -= attak_p
-        en_attak_p = level_difference(pl_lv[aut_attak], en_lv[aut_attak])
-        pl_hp[aut_attak] -= en_attak_p
-        print(f"ドラゴンから攻撃された {level_difference(pl_lv[aut_attak], en_lv[aut_attak])}")
-        return attak_p, en_attak_p
+        en_hp[attak_com] -= level
+    if en_aut_attak == 0:
+        if en_tyois == 0:
+            print("勇者はドラゴンから攻撃を受けた")
+            pl_hp[en_aut_attak] -= level
+        else:
+            print("勇者は魔王から攻撃を受けた")
+            pl_hp[en_aut_attak] -= level
     else:
-        aut_attak = random.randint(0, 1)
         print("魔王に攻撃した")
-        attak_p = level_difference(pl_lv[aut_attak], en_lv[aut_attak])
-        en_hp[aut_attak] -= attak_p
-        en_attak_p = level_difference(pl_lv[aut_attak], en_lv[aut_attak])
-        pl_hp[aut_attak] -= en_attak_p
-        print(f"魔王から攻撃された {level_difference(pl_lv[aut_attak], en_lv[aut_attak])}")
-        return attak_p, en_attak_p
+        en_hp[attak_com] -= level
+        if en_tyois == 0:
+            print("弟子はドラゴンから攻撃を受けた")
+            pl_hp[en_aut_attak] -= level
+        else:
+            print("弟子は魔王から攻撃を受けた")
+            pl_hp[en_aut_attak] -= level
+    # else:
+    #     print("魔王に攻撃した")
+    #     attak_p = level_difference(pl_lv[aut_attak], en_lv[aut_attak])
+    #     en_hp[aut_attak] -= attak_p
+    #     en_attak_p = level_difference(pl_lv[aut_attak], en_lv[aut_attak])
+    #     pl_hp[aut_attak] -= en_attak_p
+    #     print(f"魔王から攻撃された {level_difference(pl_lv[aut_attak], en_lv[aut_attak])}")
+    #     return attak_p, en_attak_p
 
 while True:
-    aut_attak = random.randint(0, 1)
-    attak(aut_attak)
-    if en_hp[0] < 0:
+    human = int(input("0: ドラゴン, 1: 魔王"))
+    attak(human)
+    if en_hp[0] <= 0:
             print("勇者はドラゴンを倒した:")
             info(pl_name,en_name,pl_lv,en_lv,pl_hp,en_hp)
             break
-    if pl_hp[0] < 0:
+    if pl_hp[0] <= 0:
             print("勇者は死んでしまった")
             info(pl_name,en_name,pl_lv,en_lv,pl_hp,en_hp)
             break
-    if pl_hp[1] < 0:
+    if pl_hp[1] <= 0:
             print("弟子は死んでしまった")
             info(pl_name,en_name,pl_lv,en_lv,pl_hp,en_hp)
             break
-
+    info(pl_name,en_name,pl_lv,en_lv,pl_hp,en_hp)
