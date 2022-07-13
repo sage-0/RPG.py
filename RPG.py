@@ -85,14 +85,7 @@ def attak(attak_com):
         else:
             print("弟子は魔王から攻撃を受けた")
             pl_hp[en_aut_attak] -= level                              #選択したプレイヤーのHP減少
-    # else:
-    #     print("魔王に攻撃した")
-    #     attak_p = level_difference(pl_lv[aut_attak], en_lv[aut_attak])
-    #     en_hp[aut_attak] -= attak_p
-    #     en_attak_p = level_difference(pl_lv[aut_attak], en_lv[aut_attak])
-    #     pl_hp[aut_attak] -= en_attak_p
-    #     print(f"魔王から攻撃された {level_difference(pl_lv[aut_attak], en_lv[aut_attak])}")
-    #     return attak_p, en_attak_p
+
 
 while True:
     human = int(input("0: ドラゴン, 1: 魔王"))
