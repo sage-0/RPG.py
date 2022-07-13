@@ -36,56 +36,55 @@ def info(p_name,e_name,p_lv,e_lv,p_hp,e_hp):
     print("="*20)
     print("")
 
-print(info(pl_name,en_name,pl_lv,en_lv,pl_hp,en_hp))
+info(pl_name,en_name,pl_lv,en_lv,pl_hp,en_hp)
 
 
 
 #攻撃倍率計算
 def level_difference(p_lv, e_lv):
-     if p_lv > e_lv:
+     if p_lv > e_lv:                                                #プレイヤーのレベルが敵のレベルより高い場合
          print("勇者のレベルが高いため、攻撃力が上がりました")
-         hitmag = 0.2*(p_lv - e_lv)
-         kaisin = random.randint(0, int(hitmag))
-         if kaisin > 5:
+         hitmag = 0.2*(p_lv - e_lv)                                 #攻撃倍率を計算
+         kaisin = random.randint(0, int(hitmag))                    #会心の一撃の攻撃倍率を乱数で計算
+         if kaisin > 5:                                             #会心の一撃倍率が5以上の場合
              print(f"会心の一撃！: {kaisin}")
-             hitmag = 10
-         return hitmag
+             hitmag = 10                                            #攻撃を10に設定
      elif (p_lv - e_lv) < 20:
         hitmag = 0.2
         return hitmag
+     return hitmag
 def en_level_difference(p_lv, e_lv):
      if p_lv < e_lv:
          print("敵のレベルが高いため、敵の攻撃力上がりました")
          e_hitmag = 0.2*(e_lv - p_lv)
-         return e_hitmag
      elif (p_lv[0] - en_lv[0]) < 20 and (p_lv[1] - e_lv[1]) < 20:
         e_hitmag = 0.2
-        return e_hitmag
+     return e_hitmag
 
 #攻撃
 def attak(attak_com):
-    en_aut_attak = random.randint(0, 1)
-    en_tyois = random.randint(0, 1)
-    level = level_difference(pl_lv[attak_com], en_lv[en_aut_attak])
-    if attak_com == 0:
+    en_aut_attak = random.randint(0, 1)                               #敵の攻撃対象
+    en_tyois = random.randint(0, 1)                                   #敵のうちどっちが攻撃するか
+    level = level_difference(pl_lv[attak_com], en_lv[en_aut_attak])   #攻撃倍率計算結果取得
+    if attak_com == 0:                                                #プレイヤーの攻撃対象
         print("ドラゴンに攻撃した")
-        en_hp[attak_com] -= level
-    if en_aut_attak == 0:
-        if en_tyois == 0:
+        en_hp[attak_com] -= level                                     #選択した敵のHP減少
+    if en_aut_attak == 0:                                             #敵の攻撃対象:勇者
+        if en_tyois == 0:                                             #敵のうちどっちが攻撃するか
             print("勇者はドラゴンから攻撃を受けた")
-            pl_hp[en_aut_attak] -= level
+            pl_hp[en_aut_attak] -= level                              #選択したプレイヤーのHP減少
         else:
             print("勇者は魔王から攻撃を受けた")
-            pl_hp[en_aut_attak] -= level
-    else:
+            pl_hp[en_aut_attak] -= level                              #選択したプレイヤーのHP減少
+    else:                                                             #プレイヤーの攻撃対象:魔王
         print("魔王に攻撃した")
-        en_hp[attak_com] -= level
-        if en_tyois == 0:
+        en_hp[attak_com] -= level                                     #選択した敵のHP減少
+        if en_tyois == 0:                                             #敵のうちどっちが攻撃するか
             print("弟子はドラゴンから攻撃を受けた")
-            pl_hp[en_aut_attak] -= level
+            pl_hp[en_aut_attak] -= level                              #選択したプレイヤーのHP減少
         else:
             print("弟子は魔王から攻撃を受けた")
-            pl_hp[en_aut_attak] -= level
+            pl_hp[en_aut_attak] -= level                              #選択したプレイヤーのHP減少
     # else:
     #     print("魔王に攻撃した")
     #     attak_p = level_difference(pl_lv[aut_attak], en_lv[aut_attak])
